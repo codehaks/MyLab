@@ -6,7 +6,8 @@ namespace MyLab
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var map = new MapService();
+            map.Execute();
         }
     }
 }
