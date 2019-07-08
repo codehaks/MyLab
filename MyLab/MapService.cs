@@ -24,7 +24,9 @@ namespace MyLab
             var p0 = Points[0];
 
             Move(p0);
-            MoveOut(out Point p1);
+
+
+            MoveOut(out Point p5);
 
             // --- Show results
             foreach (var p in Points)
@@ -37,6 +39,7 @@ namespace MyLab
         {
             p.X = p.X + 10;
             p.Y = p.X + 10;
+            ////----
         }
 
         public void MoveRef(ref Point p)
@@ -54,6 +57,8 @@ namespace MyLab
 
         public void MoveIn(in Point p)
         {
+            //p.X = 5;
+
             Console.WriteLine($" P -> ({p.X},{p.Y})");
         }
     }
