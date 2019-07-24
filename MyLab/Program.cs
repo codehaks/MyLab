@@ -10,24 +10,30 @@ namespace MyLab
         {
             Console.WriteLine("Hello World!");
 
-            Task.Factory.StartNew(() => Print('.'));
-            Task.Factory.StartNew(() => Print('?'));
+            Task.Factory.StartNew(() => Print('1'));
+            Task.Factory.StartNew(() => Print('2'));
 
-            Print('-');
+            Print('3');
 
             Console.WriteLine("Done!");
         }
 
+        private static readonly object _printLock = new object();
+
         public static void Print(char c)
         {
-
-            for (int i = 0; i < 1000; i++)
+            lock (_printLock)
             {
-                Console.Write(c);
-                Thread.Sleep(10);
+                for (int i = 0; i < 100; i++)
+                {
+                    Console.Write(c);
+                    Thread.Sleep(100);
+                }
+
             }
 
         }
+
 
 
 
