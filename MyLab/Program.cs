@@ -4,26 +4,31 @@ namespace MyLab
 {
     class Program
     {
-        public delegate void Notify(string message);
+        public delegate int Calculation(int x, int y);
 
         static void Main(string[] args)
         {
-            Notify notifier = (m) => { Console.WriteLine(m); };
-            notifier += (m) => { Console.WriteLine(" Message : " + m); };
+            Calculation calc = Plus;
 
-            WorkStarted(notifier);
-            WorkFinished(notifier);
+            var result1 = calc(2, 3);
 
+            calc = Multiply;
+            var result2 = calc(2, 3);
+
+            calc = (int x, int y) => { return (x - y); };
+            var result3 = calc(7, 8);
+
+            Console.WriteLine($" Result1 : {result1} \n result2 : {result2} \n result3 : {result3}");
         }
 
-        static public void WorkStarted(Notify notify)
+        static public int Plus(int x, int y)
         {
-            notify("started");
+            return x + y;
         }
 
-        static public void WorkFinished(Notify notify)
+        static public int Multiply(int x, int y)
         {
-            notify("Finished");
+            return x * y;
         }
     }
 }
