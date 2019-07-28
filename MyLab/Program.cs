@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -10,6 +12,10 @@ namespace MyLab
 
         public static int count = 0;
 
+        public static List<int> numList = new List<int>();
+        //public static ConcurrentBag<int> numList = new ConcurrentBag<int>();
+
+
         static async Task Main(string[] args)
         {
             Console.WriteLine("Hello World!");
@@ -19,7 +25,7 @@ namespace MyLab
 
             await Task.WhenAll(t1, t2);
 
-            Console.WriteLine($" Count : {count}");
+            Console.WriteLine($" Count : {numList.Count}");
 
 
         }
@@ -30,7 +36,8 @@ namespace MyLab
             {
                 if (number % 2 !=0)
                 {
-                    count--;
+                    //count--;
+                    numList.Add(number);
                 }
             }
         }
@@ -41,7 +48,8 @@ namespace MyLab
             {
                 if (number % 2 == 0)
                 {
-                    count++;
+                    //count++;
+                    numList.Add(number);
                 }
             }
         }
