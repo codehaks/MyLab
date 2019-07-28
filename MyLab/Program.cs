@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace MyLab
@@ -35,6 +36,8 @@ namespace MyLab
                     lock (_numLock)
                     {
                         count--;
+                        Thread.Sleep(10_000);
+
                     }
                     
                 }
@@ -47,6 +50,7 @@ namespace MyLab
             {
                 if (number % 2 == 0)
                 {
+                    Thread.Sleep(10_000);
                     lock (_numLock)
                     {
                         count++;
