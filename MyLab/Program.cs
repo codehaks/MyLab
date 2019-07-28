@@ -24,13 +24,19 @@ namespace MyLab
 
         }
 
+        public static Object _numLock=new object();
+
         public static void IsOdd()
         {
             foreach (var number in numbers)
             {
                 if (number % 2 !=0)
                 {
-                    count--;
+                    lock (_numLock)
+                    {
+                        count--;
+                    }
+                    
                 }
             }
         }
@@ -41,7 +47,10 @@ namespace MyLab
             {
                 if (number % 2 == 0)
                 {
-                    count++;
+                    lock (_numLock)
+                    {
+                        count++;
+                    }
                 }
             }
         }
