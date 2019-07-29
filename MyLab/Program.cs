@@ -9,32 +9,24 @@ namespace MyLab
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
+            
+            Parallel.For(0, 10, (index) => SetValue(index));
 
-            //ParallelOptions options
-            //= new ParallelOptions() { MaxDegreeOfParallelism = 4 };
-            //Parallel.For(0, 10,options, (index) => ShowTime(index));
-
-
-            Parallel.For(0, 10, (index) => ShowTime(index));
-            Parallel.ForEach("Hello World".ToCharArray(), (c) => ShowChar(c));
-
+            Console.WriteLine($"Finale value (x) = {X}");
         }
 
-        public static void ShowTime(int threadId)
+        public static int X { get; set; }
+
+        public static void SetValue(int threadId)
         {
             //Thread.Sleep(new Random().Next(100,500));
             //Thread.Sleep(1000);
-            Console.WriteLine($"{threadId} -> {DateTime.Now.Second}:{DateTime.Now.Millisecond}");
+
+            X = threadId;
+            Console.WriteLine($"{X} -> {DateTime.Now.Second}:{DateTime.Now.Millisecond}");
         }
 
 
-        public static void ShowChar(char c)
-        {
-            Thread.Sleep(new Random().Next(100, 500));
-            Console.WriteLine($"{c} -> {DateTime.Now.Second}:{DateTime.Now.Millisecond}");
-        }
-
-
-
+       
     }
 }
