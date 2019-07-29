@@ -10,25 +10,23 @@ namespace MyLab
         {
             Console.WriteLine("Hello World!");
 
-            var t1=Task.Run(() => { Parallel.For(0, 10, (index) => ShowTime(index)); });
-            var t2=Task.Run(() => { Parallel.ForEach("Hello World".ToCharArray(), (c) => ShowChar(c)); });
+            var options = new ParallelOptions { MaxDegreeOfParallelism = 2 };
 
-            Task.WaitAll(t1, t2);
+            Parallel.ForEach("Hello World".ToCharArray(),options, (c,s) => ShowChar(c,s)); 
                         
-        }
+        }    
 
-        public static void ShowTime(int threadId)
+        public static void ShowChar(char c,ParallelLoopState state)
         {
-            //Thread.Sleep(new Random().Next(100,500));
+            Thread.Sleep(1000);
+            
             var now = DateTime.Now;
-            Console.WriteLine($"{threadId} -> {now.Second}:{now.Millisecond} - {now.Ticks}");
-        }
 
-
-        public static void ShowChar(char c)
-        {
-            //Thread.Sleep(new Random().Next(100, 500));
-            var now = DateTime.Now;
+            if (char.IsWhiteSpace(c))
+            {
+                //state.Stop();
+                state.Break();
+            }
 
             Console.WriteLine($"{c} -> {now.Second}:{now.Millisecond} - {now.Ticks}");
         }
