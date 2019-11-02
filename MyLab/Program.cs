@@ -8,6 +8,7 @@ namespace MyLab
     {
         public static int[] numbers = Enumerable.Range(0, 1000_000).ToArray();
 
+
         public static int count = 0;
 
         static async Task Main(string[] args)
